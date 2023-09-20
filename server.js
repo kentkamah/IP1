@@ -8,7 +8,7 @@ let index = require('./routes/index');
 let image = require('./routes/image');
 
 // connecting the database
-let mongodb_url = 'mongodb://localhost:27017/';
+let mongodb_url = 'mongodb+srv://kentkamah:kke7XygtfXWh7EJL@moringadev.fajurbi.mongodb.net/?retryWrites=true&w=majority&appName=AtlasApp';
 let dbName = 'darkroom';
 mongoose.connect(`${mongodb_url}${dbName}`,{ useNewUrlParser: true , useUnifiedTopology: true }, (err)=>{
     if (err) console.log(err)
@@ -36,8 +36,6 @@ app.use(express.json())
 
 app.use('/', index);
 app.use('/image', image);
-
-
 
  
 const PORT = process.env.PORT || 5000;
