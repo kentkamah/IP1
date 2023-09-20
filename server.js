@@ -2,24 +2,22 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const path = require('path');
+const config = require('./_config');
 
 // Define routes
 let index = require('./routes/index');
 let image = require('./routes/image');
-
+require('dotenv').config();
 // connecting the database
-let mongodb_url = 'mongodb+srv://kentkamah:kke7XygtfXWh7EJL@moringadev.fajurbi.mongodb.net/?retryWrites=true&w=majority&appName=AtlasApp';
+let mongodb_url = 'mongodb+srv://kentkamah:7qUdWkK3v81QouNu@moringadev.fajurbi.mongodb.net/?retryWrites=true&w=majority&appName=AtlasApp';
 let dbName = 'darkroom';
 mongoose.connect(`${mongodb_url}${dbName}`,{ useNewUrlParser: true , useUnifiedTopology: true }, (err)=>{
     if (err) console.log(err)
 });
-
-// test if the database has connected successfully
-let db = mongoose.connection;
-db.once('open', ()=>{
-    console.log('Database connected successfully')
-})
-
+const db = mongoose.connection;
+db.once('open', () => {
+  console.log('Database connected successfully');
+});
 // Initializing the app
 const app = express();
 
@@ -36,6 +34,8 @@ app.use(express.json())
 
 app.use('/', index);
 app.use('/image', image);
+
+
 
  
 const PORT = process.env.PORT || 5000;
